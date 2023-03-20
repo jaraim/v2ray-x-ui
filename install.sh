@@ -11,7 +11,7 @@ else
 fi
 
 # 安装v2ray
-bash <(curl -s -L https:https://raw.githubusercontent.com/jaraim/v2ray/main/install.sh)
+bash <(curl -s -L https://raw.githubusercontent.com/jaraim/v2ray/main/install.sh)
 
 # 安装x-ui
 bash <(curl -s -L https://raw.githubusercontent.com/jaraim/xray-x-ui/main/install.sh)

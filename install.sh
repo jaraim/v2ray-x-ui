@@ -39,21 +39,28 @@ case ${option} in
             if [[ -z "$domain" ]]; then
                 domain=$(curl -s ipv4.icanhazip.com)
             fi
-            sudo rm /etc/nginx/sites-enabled/default
+            sudo rm -f /etc/nginx/sites-enabled/default
             cat << EOF | sudo tee /etc/nginx/sites-available/x-ui.conf
-            server {
-                listen 80;
-                server_name $domain;
-                location / {
-                    proxy_pass http://127.0.0.1:65432;
-                    proxy_set_header Host $host;
-                    proxy_set_header X-Real-IP $remote_addr;
-                    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                }
-            }
+server {
+    listen 80;
+    server_name $domain;
+    location / {
+        proxy_pass http://127.0.0.1:65432;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+    }
+}
 EOF
+
+            # 如果 /etc/nginx/sites-enabled/ 下已有 x-ui.conf 的软链接，则先删除它
+            if [ -L "/etc/nginx/sites-enabled/x-ui.conf" ]; then
+                sudo rm -f /etc/nginx/sites-enabled/x-ui.conf
+            fi
+
             sudo ln -s /etc/nginx/sites-available/x-ui.conf /etc/nginx/sites-enabled/
-            sudo nginx -t && sudo nginx -s reload
+            sudo nginx -t && sudo systemctl restart nginx
+            echo "Nginx 反向代理安装完成！"
         fi
         echo "全部安装完成！"
         ;;
@@ -78,21 +85,27 @@ EOF
             if [[ -z "$domain" ]]; then
                 domain=$(curl -s ipv4.icanhazip.com)
             fi
-            sudo rm /etc/nginx/sites-enabled/default
+            sudo rm -f /etc/nginx/sites-enabled/default
             cat << EOF | sudo tee /etc/nginx/sites-available/x-ui.conf
-            server {
-                listen 80;
-                server_name $domain;
-                location / {
-                    proxy_pass http://127.0.0.1:65432;
-                    proxy_set_header Host $host;
-                    proxy_set_header X-Real-IP $remote_addr;
-                    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                }
-            }
+server {
+    listen 80;
+    server_name $domain;
+    location / {
+        proxy_pass http://127.0.0.1:65432;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+    }
+}
 EOF
+
+            # 如果 /etc/nginx/sites-enabled/ 下已有 x-ui.conf 的软链接，则先删除它
+            if [ -L "/etc/nginx/sites-enabled/x-ui.conf" ]; then
+                sudo rm -f /etc/nginx/sites-enabled/x-ui.conf
+            fi
+
             sudo ln -s /etc/nginx/sites-available/x-ui.conf /etc/nginx/sites-enabled/
-            sudo nginx -t && sudo nginx -s reload
+            sudo nginx -t && sudo systemctl restart nginx
             echo "Nginx 反向代理安装完成！"
         else
             echo "Nginx 未安装！"

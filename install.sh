@@ -14,7 +14,7 @@ fi
 # 显示安装选项
 echo -e "请选择要安装的软件：\n"
 echo -e "    1. 全部安装"
-echo -e "    2. 安装 V2RAY"
+echo -e "    2. 安装 v2ray"
 echo -e "    3. 安装 x-ui"
 echo -e "    4. 安装 Nginx 反向代理"
 echo -n "请输入数字 [1-4]："

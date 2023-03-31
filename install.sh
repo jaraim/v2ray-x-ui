@@ -111,6 +111,7 @@ EOF
             echo "Nginx 未安装！"
              sudo apt-get update
     sudo apt-get install nginx -y
+    exec $0
         fi
         ;;
     *)

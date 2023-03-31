@@ -109,6 +109,8 @@ EOF
             echo "Nginx 反向代理安装完成！"
         else
             echo "Nginx 未安装！"
+             sudo apt-get update
+    sudo apt-get install nginx -y
         fi
         ;;
     *)

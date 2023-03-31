@@ -1,25 +1,10 @@
-
-if [[ $(command -v apt-get) ]]; then
-sudo apt-get update -y
-sudo apt-get install curl -y
-elif [[ $(command -v yum) ]]; then
-sudo yum update -y
-sudo yum install curl -y
-elif [[ $(command -v dnf) ]]; then
-sudo dnf update -y
-sudo dnf install curl -y
-else
-    echo "不支持的操作系统" && exit 1
-fi
 #!/bin/bash
-
 # 安装依赖工具
 if [[ $(command -v apt-get) ]]; then
 sudo apt-get update -y && sudo apt-get install -y curl gnupg2 ca-certificates unzip
 elif [[ $(command -v yum) ]]; then
 sudo yum update -y && sudo yum install -y curl gnupg2 ca-certificates unzip
 elif [[ $(command -v dnf) ]]; then
-
 sudo dnf update -y && sudo dnf install -y curl gnupg2 ca-certificates unzip
 else
     echo "不支持的操作系统" && exit 1

@@ -1,12 +1,13 @@
-sudo apt-get update
-sudo apt-get install curl -y
 #!/bin/bash
 # 安装依赖工具
 if [[ $(command -v apt-get) ]]; then
+sudo apt-get install curl -y
     apt-get update -y && apt-get install -y curl gnupg2 ca-certificates unzip
 elif [[ $(command -v yum) ]]; then
+sudo yum install curl -y
     yum update -y && yum install -y curl gnupg2 ca-certificates unzip
 elif [[ $(command -v dnf) ]]; then
+sudo dnf install curl -y
     dnf update -y && dnf install -y curl gnupg2 ca-certificates unzip
 else
     echo "不支持的操作系统" && exit 1

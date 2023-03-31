@@ -110,8 +110,8 @@ EOF
         else
             echo "Nginx 未安装！"
              sudo apt-get update
-    sudo apt-get install nginx -y
-    echo -e
+             sudo apt-get install nginx -y
+             echo -e "\n安装完成！"
         fi
         ;;
     *)

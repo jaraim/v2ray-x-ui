@@ -1,5 +1,6 @@
+sudo apt-get update
+sudo apt-get install curl -y
 #!/bin/bash
-
 # 安装依赖工具
 if [[ $(command -v apt-get) ]]; then
     apt-get update -y && apt-get install -y curl gnupg2 ca-certificates unzip
@@ -109,9 +110,8 @@ EOF
             echo "Nginx 反向代理安装完成！"
         else
             echo "Nginx 未安装！"
-             sudo apt-get update
-             sudo apt-get install nginx -y
-             echo -e "\n安装完成！"
+            sudo apt-get install nginx -y
+            echo -e "\n安装完成！"
         fi
         ;;
     *)
